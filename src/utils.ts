@@ -50,3 +50,7 @@ export function lift3<A, B, C, D>(
 ): Parser<D> {
   return bind(p, (x) => bind(q, (y) => bind(r, (z) => pure(f(x, y, z)))));
 }
+
+export function voidType<T>(p: Parser<T>): Parser<void> {
+  return bind(p, () => pure(undefined));
+}
