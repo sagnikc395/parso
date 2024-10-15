@@ -10,7 +10,7 @@ interface InputModule {
 }
 
 //input module implementation
-const Input: InputModule = {
+export const Input: InputModule = {
   readChar: (input) => (input.length > 0 ? Ok(input[0]) : Err("End of Input")),
   advance: (input) => input.slice(1),
   advanceBy: (n) => (input) => input.slice(n),
@@ -19,5 +19,4 @@ const Input: InputModule = {
 };
 
 //parser type
-type Parser<T> = (input: Input) => Result<[T, Input], string>;
-
+export type Parser<T> = (input: Input) => Result<[T, Input], string>;
