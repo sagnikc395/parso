@@ -9,6 +9,7 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "effect": "^3.8.3"
+    "effect": "^3.8.3",
+    "ts-results": "^3.3.0"
   }
 }
