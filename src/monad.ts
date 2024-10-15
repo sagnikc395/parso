@@ -1,4 +1,4 @@
-import { Ok } from "ts-results";
+import { Err, Ok } from "ts-results";
 import type { Parser } from "./parser";
 
 export function pure<T>(v: T): Parser<T> {
@@ -10,4 +10,8 @@ export function bind<A, B>(p: Parser<A>, f: (a: A) => Parser<B>): Parser<B> {
     const result = p(input);
     return result.andThen(([pOut, rest]) => f(pOut)(rest));
   };
+}
+
+export function fail<T>(msg: string): Parser<T> {
+  return () => Err(msg);
 }
