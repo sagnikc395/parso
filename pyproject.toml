@@ -1,11 +1,7 @@
 [project]
 name = "parso"
 version = "0.1.0"
-description = "Add your description here"
+description = "an parser combinator library in python."
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = [
-    "pipe>=2.2",
-    "pytest>=8.4.1",
-    "toolz>=1.0.0",
-]
+dependencies = ["pipe>=2.2", "pytest>=8.4.1", "toolz>=1.0.0"]
