@@ -48,30 +48,10 @@ class Err(Result):
 ParserResult = Result[Success[A]]
 
 
-# parser structure
 class Parser(Generic[A]):
-    def __init__(self, parse_fn: Callable[[ParserInput], Result[Success[A]]]):
+    def __init__(self,parse_fn: Callable[[ParserInput],Result[Success[A]]]):
         self._parse_fn = parse_fn
 
-    def parse(self, input: ParserInput) -> Result[Success[A]]:
+    def parse(self,input: ParserInput) -> Result[Success[A]]:
         return self._parse_fn(input)
 
-    def map(self, fn: Callable[[A], A]) -> 'Parser[A]':
-        """Functional map on parser output value"""
-        def mapped_parser(input: ParserInput) -> Result[Success[A]]:
-            result = self.parse(input)
-            if isinstance(result, Ok):
-                success = result.value
-                return Ok(Success(_tag="Success", value=fn(success.value), remaining=success.remaining))
-            return result
-        return Parser(mapped_parser)
-
-    def flat_map(self, fn: Callable[[A], 'Parser[A]']) -> 'Parser[A]':
-        """Monadic bind for chaining parsers"""
-        def flat_mapped_parser(input: ParserInput) -> Result[Success[A]]:
-            result = self.parse(input)
-            if isinstance(result, Ok):
-                success = result.value
-                return fn(success.value).parse(success.remaining)
-            return result
-        return Parser(flat_mapped_parser)
